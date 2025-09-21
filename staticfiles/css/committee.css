@@ -1,0 +1,479 @@
+:root {
+    --primary-color: #0084AB;
+    --primary-dark: #004766;
+    --light-bg: #f0fefe;
+    --text-light: #EEE;
+    --text-dark: #333;
+    --shadow: 10px 10px 20px rgba(0, 132, 171, 0.85);
+    --border-radius: 16px;
+    --transition: all 0.3s ease;
+}
+
+/* Reset and base styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: #f9f9f9;
+    overflow-x: hidden;
+}
+
+.committee-page {
+    width: 100%;
+    min-height: 100vh;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Animated Title with better animation (fade + slide) */
+.animated-title {
+    font-size: clamp(1.75rem, 5vw, 2.25rem);
+    color: var(--primary-color);
+    text-align: center;
+    margin: 3.5rem 0 2.5rem;
+    font-weight: bold;
+    opacity: 0;
+    transform: translateY(-40px);
+    animation: slideFadeDown 1s ease-out forwards;
+}
+
+@keyframes slideFadeDown {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Committees Grid */
+.committees-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 1200px;
+    padding: 1rem;
+    justify-content: center;
+}
+
+/* Committee Card */
+.committee-card {
+    background-color: var(--primary-color);
+    box-shadow: var(--shadow);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    transition: var(--transition);
+    /* height: fit-content; */
+    height: 750px;
+    display: flex;
+    flex-direction: column;
+}
+
+.committee-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 30px rgba(0, 132, 171, 0.75);
+    filter: brightness(1.05);
+}
+
+/* Card Content */
+.card-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    height: 100%;
+    /*  */
+    overflow: hidden;
+}
+
+/* Committee Image container and image styles */
+.committee-image {
+    width: 100%;
+    height: 180px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0; /* منع التصغير */
+}
+
+.committee-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.committee-image img:hover {
+    transform: scale(1.05);
+}
+
+/* Video container responsive */
+.video-container {
+    width: 100%;
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 8px;
+}
+
+/* Text Content */
+.committee-title {
+    font-size: clamp(1.15rem, 3vw, 1.25rem);
+    color: var(--text-light);
+    text-align: center;
+    margin: 0;
+}
+
+.committee-description {
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    color: var(--text-light);
+    text-align: center;
+    margin: 0;
+    flex-grow: 1;
+    line-height: 1.4;
+}
+
+/* Links (PDF and Program links) */
+.pdf-link {
+    background-color: var(--text-light);
+    color: var(--primary-color);
+    padding: 0.625rem 1.25rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: var(--transition);
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+    max-width: 200px;
+}
+
+.pdf-link:hover:not(.disabled) {
+    background-color: #E0E0E0;
+    transform: translateY(-2px);
+}
+
+.pdf-link.disabled {
+    cursor: default;
+    opacity: 0.6;
+}
+
+/* Buttons */
+.committee-btn {
+    background-color: var(--text-light);
+    color: var(--primary-color);
+    border: none;
+    border-radius: 30px;
+    padding: 0.625rem 1.25rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition);
+    width: 100%;
+    max-width: 200px;
+}
+
+.committee-btn:hover {
+    background-color: #E0E0E0;
+    transform: translateY(-2px);
+}
+
+.committee-btn.remove {
+    background-color: #ffebee;
+    color: #d32f2f;
+}
+
+.committee-btn.remove:hover {
+    background-color: #ffcdd2;
+}
+
+/* Back Home Button */
+.button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 2.5rem 0;
+}
+
+.back-home-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-decoration: none;
+    background-color: transparent;
+    transition: var(--transition);
+    width: 100%;
+    max-width: 250px;
+}
+
+.back-home-btn:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+    transform: translateY(-4px);
+}
+
+/* Education Levels */
+.education-levels {
+    width: 100%;
+}
+
+.education-label {
+    display: block;
+    font-size: 0.9rem;
+    color: #c5e8f3;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+.levels-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.education-level {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    padding: 0.25rem 0.625rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* No Programs Message */
+.no-programs-message {
+    width: 90%;
+    max-width: 600px;
+    margin: 2rem auto;
+    text-align: center;
+    padding: 2.5rem 1.25rem;
+    background-color: rgba(0, 132, 171, 0.1);
+    border-radius: var(--border-radius);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    grid-column: 1 / -1;
+}
+
+.message-icon {
+    font-size: 4rem;
+    margin-bottom: 1.25rem;
+    opacity: 0.7;
+}
+
+.no-programs-message h2 {
+    color: var(--primary-color);
+    font-size: clamp(1.5rem, 4vw, 1.8rem);
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.no-programs-message p {
+    color: #666;
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
+    margin-bottom: 1.875rem;
+    line-height: 1.6;
+}
+
+/* النافذة المنبثقة المخصصة */
+.custom-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.custom-modal-content {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    max-width: 600px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+}
+
+.custom-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #777;
+    transition: var(--transition);
+}
+
+.custom-close:hover {
+    color: var(--primary-color);
+}
+
+#modal-title {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+#modal-description {
+    line-height: 1.6;
+    white-space: pre-line;
+}
+
+.show-more {
+    text-decoration: none;
+    color: #c5e8f3;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    margin-right: 0.3rem;
+    display: inline-block;
+}
+
+.show-more:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.15);
+    text-decoration: underline;
+}
+
+.show-more:active {
+    transform: translateY(1px);
+}
+
+
+/* تحسينات إضافية للنافذة المنبثقة */
+.custom-modal-content {
+    background: linear-gradient(135deg, #f8fdff 0%, #e8f7ff 100%);
+    border: 1px solid #0084AB;
+    box-shadow: 0 10px 30px rgba(0, 132, 171, 0.25);
+}
+
+#modal-title {
+    color: #0084AB;
+    border-bottom: 2px solid #0084AB;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+#modal-description {
+    line-height: 1.8;
+    color: #333;
+    font-size: 1.05rem;
+}
+
+
+@media (max-width: 768px) {
+    .show-more {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.95rem;
+    }
+    
+    .committee-description {
+        line-height: 1.6;
+    }
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+    .committee-page {
+        padding: 0.75rem;
+    }
+    
+    .animated-title {
+        margin: 2.5rem 0 1.875rem;
+    }
+    
+    .committees-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+        padding: 0.625rem;
+    }
+    
+    .card-content {
+        padding: 1.25rem;
+        gap: 0.875rem;
+    }
+    
+    .committee-image {
+        height: 160px;
+    }
+    
+    .education-level {
+        font-size: 0.75rem;
+        padding: 0.2rem 0.5rem;
+    }
+    
+    .education-label {
+        font-size: 0.85rem;
+    }
+    
+    .no-programs-message {
+        padding: 1.875rem 0.9375rem;
+        margin: 1.25rem 0.625rem;
+    }
+    
+    .message-icon {
+        font-size: 3rem;
+    }
+    
+    .back-home-btn {
+        max-width: 220px;
+        padding: 0.625rem 1.25rem;
+        font-size: 0.9rem;
+    }
+    
+    .custom-modal-content {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .committees-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1200px) {
+    .committees-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
