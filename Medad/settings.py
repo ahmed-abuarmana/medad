@@ -128,13 +128,13 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # مجلد لتجميع كل ملفات static عند النشر
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # مجلدات إضافية تحتوي على ملفات static أثناء التطوير
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -158,5 +158,6 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "medaad.center@gmail.com"        # بريدك
 EMAIL_HOST_PASSWORD = "ukmwdflrmexnjyyt"      # App Password اللي أنشأته
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
 
 
