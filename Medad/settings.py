@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-3%x=i$t_*$h)f($ekm#75gvlcyj*r0_-rpb6$6hmpy8v$%zx!i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["https://medad-u5ie.onrender.com"]
+ALLOWED_HOSTS = ["medad-u5ie.onrender.com"]
 
 
 # Application definition
@@ -158,4 +158,5 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "medaad.center@gmail.com"        # بريدك
 EMAIL_HOST_PASSWORD = "ukmwdflrmexnjyyt"      # App Password اللي أنشأته
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
 
