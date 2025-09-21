@@ -1,0 +1,73 @@
+{% extends "main/layout.html" %}
+{% load static %}
+
+{% block head %}
+    <link href="{% static 'css/committees.css' %}" rel="stylesheet">
+    <!-- إضافة Font Awesome إذا لم تكن موجودة -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% endblock %}
+
+{% block body %}
+<div class="committees-container">
+    <header class="main-header">
+        <div class="title-with-icon">
+            <i class="fas fa-puzzle-piece"></i>
+            <h1>اللجان</h1>
+        </div>
+        <p>اختر لجنة لاستعراض محتواها والأنشطة التابعة لها</p>
+    </header>
+
+    <div class="committees-grid">
+        
+        <div class="committee-card">
+            <div class="icon"><i class="fas fa-bullseye fa-3x mb-3"></i></div>
+            <h2>اللجنة الثقافية</h2>
+            <p>تنمية الثقافة والمعرفة</p>
+            <button><a href="{% url 'cultural' %}">استكشف اللجنة</a></button>
+        </div>
+        
+        <div class="committee-card">
+            <div class="icon"><i class="fas fa-video fa-3x mb-3"></i></div>
+            <h2>اللجنة الإعلامية</h2>
+            <p>المحتوى الإعلامي</p>
+            <button><a href="{% url 'media' %}">استكشف اللجنة</a></button>
+        </div>
+
+        <div class="committee-card">
+            <div class="icon"><i class="fas fa-utensils fa-3x mb-3"></i></div>
+            <h2>اللجنة الاجتماعية</h2>
+            <p>تنظيم الفعاليات الاجتماعية</p>
+            <button><a href="{% url 'social' %}">استكشف اللجنة</a></button>
+        </div>
+        
+        <div class="committee-card">
+            <div class="icon"><i class="fas fa-trophy fa-3x mb-3"></i></div>
+            <h2>اللجنة التحفيزية</h2>
+            <p>تحفيز وتشجيع الأعضاء</p>
+            <button><a href="{% url 'volunteer' %}">استكشف اللجنة</a></button>
+        </div>
+
+        <div class="committee-card">
+            <div class="icon"><i class="fas fa-futbol fa-3x mb-3"></i></div>
+            <h2>اللجنة الرياضية</h2>
+            <p>تنظيم الانشطة الرياضية</p>
+            <button><a href="{% url 'sports' %}">استكشف اللجنة</a></button>
+        </div>
+
+
+        <div class="committee-card">
+            <div class="icon"><i class="fas fa-book fa-3x mb-3"></i></div>
+            <h2>اللجنة العلمية</h2>
+            <p>تنمية الجوانب الشرعية</p>
+            <button><a href="{% url 'scientific' %}">استكشف اللجنة</a></button>
+        </div>
+    </div>
+
+    <div class="back-home-container">
+        <a href="{% url 'index' %}" class="back-home-btn">
+            <span class="btn-text">العودة للصفحة الرئيسية</span>
+        </a>
+    </div>
+</div>
+{% endblock %}

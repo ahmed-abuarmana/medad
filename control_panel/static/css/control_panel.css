@@ -1,0 +1,457 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
+
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --dark-color: #2c3e50;
+    --gray-light: #f5f7fa;
+    --gray-medium: #7f8c8d;
+    --danger-color: #e74c3c;
+    --danger-dark: #c0392b;
+    --font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+    /* Committee colors */
+    --social-color: #DC2626;
+    --scientific-color: #FB923C;
+    --cultural-color: #3B82F6;
+    --sports-color: #0EA5E9;
+    --motivational-color: #A7F3D0;
+    --media-color: #14B8A6;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    font-family: var(--font-family);
+    background-color: var(--gray-light);
+    direction: rtl;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+}
+
+.main-container {
+    padding: 1.5rem 1rem;
+    max-width: 1280px;
+    margin: 0 auto;
+    animation: fadeIn 1s ease;
+}
+
+.sections-wrapper {
+    width: 100%;
+}
+
+.section-block {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    padding: 2rem 2.5rem;
+    margin-bottom: 2rem;
+    animation: slideUp 0.8s cubic-bezier(0.18, 1.25, 0.4, 1) forwards;
+}
+
+.animated-title {
+    text-align: center;
+    color: var(--dark-color);
+    font-size: clamp(1.8rem, 2vw, 2.4rem);
+    font-weight: 700;
+    margin-bottom: 2rem;
+    position: relative;
+    padding-bottom: 1rem;
+    animation: titleReveal 1.2s ease forwards;
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+.animated-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 50%;
+    transform: translateX(50%);
+    width: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    border-radius: 3px;
+    animation: lineExpand 1s 0.5s ease forwards;
+}
+
+.page-container {
+    position: relative;
+}
+
+.program-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 10px;
+    padding: 1.5rem 1.75rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: default;
+    animation: cardAppear 0.6s ease forwards;
+    animation-delay: calc(var(--card-index) * 0.1s);
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    position: relative;
+    overflow: hidden;
+}
+
+.program-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 6px;
+    height: 100%;
+    transition: width 0.3s ease;
+}
+
+.program-card:hover {
+    transform: translateY(-7px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+}
+
+.program-card:hover::before {
+    width: 100%;
+    opacity: 0.1;
+}
+
+.program-card.الاجتماعية::before { background-color: var(--social-color); }
+.program-card.العلمية::before { background-color: var(--scientific-color); }
+.program-card.الثقافية::before { background-color: var(--cultural-color); }
+.program-card.الرياضية::before { background-color: var(--sports-color); }
+.program-card.التحفيزية::before { background-color: var(--motivational-color); }
+.program-card.الإعلامية::before { background-color: var(--media-color); }
+
+.program-card.الاجتماعية:hover { border-color: var(--social-color); }
+.program-card.العلمية:hover { border-color: var(--scientific-color); }
+.program-card.الثقافية:hover { border-color: var(--cultural-color); }
+.program-card.الرياضية:hover { border-color: var(--sports-color); }
+.program-card.التحفيزية:hover { border-color: var(--motivational-color); }
+.program-card.الإعلامية:hover { border-color: var(--media-color); }
+
+.program-title {
+    color: var(--dark-color);
+    font-size: clamp(1.25rem, 1.5vw, 1.5rem);
+    margin: 0 0 0.75rem 0;
+    font-weight: 600;
+    position: relative;
+}
+
+.program-description {
+    color: var(--gray-medium);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    font-size: clamp(1rem, 1.1vw, 1.15rem);
+}
+
+.button-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.pdf-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.25rem;
+    background-color: var(--primary-color);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 10px rgba(52, 152, 219, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.pdf-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+}
+
+.pdf-link:hover::before {
+    transform: translateX(0);
+}
+
+.pdf-link:hover,
+.pdf-link:focus-visible {
+    background-color: #2980b9;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 16px rgba(52, 152, 219, 0.6);
+}
+
+.pdf-link.disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none !important;
+}
+
+.pdf-icon {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.pdf-link:hover .pdf-icon {
+    transform: rotate(10deg) scale(1.2);
+}
+
+.program-button {
+    padding: 0.55rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 10px rgba(231, 76, 60, 0.4);
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.program-button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+.program-button:hover::after {
+    animation: ripple 1s ease-out;
+}
+
+.remove-button {
+    background-color: var(--danger-color);
+}
+
+.remove-button:hover,
+.remove-button:focus-visible {
+    background-color: var(--danger-dark);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 16px rgba(192, 57, 43, 0.6);
+}
+
+.back-button,
+.home-back-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 2rem;
+    background-color: var(--dark-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-weight: 700;
+    font-size: 1rem;
+    box-shadow: 0 4px 10px rgba(44, 62, 80, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.back-button::before,
+.home-back-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.back-button:hover::before,
+.home-back-button:hover::before {
+    transform: translateX(100%);
+}
+
+.back-button:hover,
+.home-back-button:hover {
+    background-color: #1a252f;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(26, 37, 47, 0.6);
+}
+
+.back-button-wrapper {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.home-back-container {
+    text-align: center;
+    margin-top: 1.5rem;
+    animation: fadeIn 1s 0.5s ease forwards;
+    opacity: 0;
+}
+
+.no-programs-message {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--gray-medium);
+    font-size: clamp(1.1rem, 1.4vw, 1.3rem);
+    animation: fadeIn 1.2s ease;
+}
+
+.no-programs-message i {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    color: var(--gray-medium);
+    display: inline-block;
+    animation: pulse 2s infinite ease-in-out;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes slideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes titleReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes lineExpand {
+    0% { width: 0; }
+    100% { width: 6rem; }
+}
+
+@keyframes cardAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    20% {
+        transform: scale(50, 50);
+        opacity: 0.3;
+    }
+    100% {
+        transform: scale(100, 100);
+        opacity: 0;
+    }
+}
+
+.reveal {
+    opacity: 0;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .section-block {
+        padding: 1.5rem 2rem;
+    }
+    
+    .program-card {
+        padding: 1.25rem 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .button-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .program-card {
+        padding: 1rem 1.25rem;
+    }
+    
+    .animated-title {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-container {
+        padding: 1rem 0.5rem;
+    }
+    
+    .section-block {
+        padding: 1.25rem 1.5rem;
+    }
+    
+    .program-title {
+        font-size: 1.2rem;
+    }
+    
+    .program-description {
+        font-size: 0.95rem;
+    }
+    
+    .pdf-link, .program-button, .back-button, .home-back-button {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+    }
+    
+    .no-programs-message i {
+        font-size: 3rem;
+    }
+}

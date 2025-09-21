@@ -1,0 +1,174 @@
+{% extends "main/layout.html" %}
+{% load static %}
+
+{% block head %}
+    <link href="{% static 'css/committee.css' %}" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% endblock %}
+
+{% block body %}
+<div class="committee-page">
+    <h1 class="animated-title">اللجنة الإجتماعية</h1>
+    
+    <div class="committees-grid">
+        {% if not committees %}
+        <div class="no-programs-message">
+            <div class="message-icon"><i class="fas fa-envelope-open"></i></div>
+            <h2>لا يوجد برامج الآن في اللجنة الإجتماعية</h2>
+            <p>سيتم إضافة برامج جديدة قريباً، شكراً لتفهمكم.</p>
+        </div>
+        {% endif %}
+
+        {% for committee in committees %}
+        <div class="committee-card">
+            <div class="card-content">
+                {% if committee.link %}
+                    {% if "youtu.be" in committee.link %}
+                        {% with committee.link|cut:"https://youtu.be/" as vid %}
+                            <div class="video-container">
+                                <iframe 
+                                    src="https://www.youtube.com/embed/{{ vid|slice:':11' }}" 
+                                    title="YouTube video player" frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+                        {% endwith %}
+                    {% elif "watch?v=" in committee.link %}
+                        {% with committee.link|cut:"https://www.youtube.com/watch?v=" as vid %}
+                            <div class="video-container">
+                                <iframe 
+                                    src="https://www.youtube.com/embed/{{ vid|slice:':11' }}" 
+                                    title="YouTube video player" frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+                        {% endwith %}
+                    {% else %}
+                        <div class="unsupported-link">
+                            <p>رابط غير مدعوم</p>
+                        </div>
+                    {% endif %}
+                {% elif committee.image %}
+                    <div class="committee-image">
+                        <img src="{{ committee.image.url }}" alt="{{ committee.title }}" loading="lazy" />
+                    </div>
+                {% endif %}
+                
+                <h2 class="committee-title">{{ committee.title }}</h2>
+                
+                {% if committee.education_levels %}
+                    <div class="education-levels">
+                        <span class="education-label">المرحلة الإشرافية</span>
+                        <div class="levels-container">
+                            {% for level in committee.get_education_levels_list %}
+                                <span class="education-level">{{ level }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+
+                <p class="committee-description">
+                {{ committee.description|slice:":255" }}
+                {% if committee.description|length > 255 %}
+                    ... <a href="#" class="show-more" data-description="{{ committee.description|escapejs }}">عرض المزيد</a>
+                {% endif %}
+                </p>
+                
+                {% if committee.link %} 
+                    <a href="{{ committee.link }}" target="_blank" rel="noopener noreferrer" class="pdf-link">
+                        <span class="pdf-icon"><i class="fa-solid fa-link"></i></span>
+                        <span class="pdf-text">رابط البرنامج</span>
+                    </a>
+                {% else %}
+                    <a class="pdf-link disabled" aria-disabled="true">
+                        <span class="pdf-icon"><i class="fa-solid fa-link"></i></span>
+                        <span class="pdf-text">لا يوجد رابط</span>
+                    </a>
+                {% endif %}
+
+                {% if committee.pdf %}
+                    <a href="{% url 'pdf_view' committee.id %}" target="_blank" rel="noopener noreferrer" class="pdf-link">
+                        <span class="pdf-icon"><i class="fas fa-link"></i></span>
+                        <span class="pdf-text">عرض الملف</span>
+                    </a>
+                {% else %}
+                    <a class="pdf-link disabled" aria-disabled="true">
+                        <span class="pdf-icon"><i class="fa-solid fa-ban"></i></span>
+                        <span class="pdf-text">لا يوجد ملف مرفق</span>
+                    </a>
+                {% endif %}
+                
+                <form method="post" action="{% url 'toggle_committee' committee.id %}" onsubmit="handleSubmit(event, this)">
+                    {% csrf_token %}
+                    {% if committee.is_added %}
+                        <button type="submit" class="committee-btn remove" data-action="remove">
+                            <span class="btn-text">إزالة من برامجي</span>
+                        </button>
+                    {% else %}
+                        <button type="submit" class="committee-btn add" data-action="add">
+                            <span class="btn-text">إضافة الى برامجي</span>
+                        </button>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="button-container">
+        <a href="{% url 'committees' %}" class="back-home-btn">
+            <span class="btn-text">العودة لصفحة اللجان</span>
+        </a>
+    </div>
+</div>
+
+<!-- النافذة المنبثقة -->
+<div id="description-modal" class="custom-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description" tabindex="-1">
+    <div class="custom-modal-content">
+        <button class="custom-close" aria-label="إغلاق النافذة">&times;</button>
+        <h3 id="modal-title">الوصف الكامل</h3>
+        <p id="modal-description"></p>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const modal = document.getElementById("description-modal");
+        const modalDescription = document.getElementById("modal-description");
+        const closeBtn = modal.querySelector(".custom-close");
+        
+        // إضافة حدث النقر لعرض المزيد
+        document.querySelectorAll(".show-more").forEach(link => {
+            link.addEventListener("click", function (e) {
+                e.preventDefault();
+                const fullDescription = this.getAttribute("data-description");
+                modalDescription.textContent = fullDescription;
+                modal.style.display = "flex";
+                // إضافة التركيز على النافذة المنبثقة للأمانة
+                modal.focus();
+            });
+        });
+
+        // إغلاق النافذة المنبثقة
+        closeBtn.addEventListener("click", function() {
+            modal.style.display = "none";
+        });
+        
+        // إغلاق النافذة عند النقر خارج المحتوى
+        window.addEventListener("click", function(e) {
+            if (e.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+        
+        // إغلاق النافذة بمفتاح ESC
+        document.addEventListener("keydown", function(e) {
+            if (e.key === "Escape" && modal.style.display === "flex") {
+                modal.style.display = "none";
+            }
+        });
+    });
+</script>
+{% endblock %}
