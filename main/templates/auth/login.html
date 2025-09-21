@@ -1,0 +1,38 @@
+{% extends "main/layout.html" %}
+{% load static %}
+{% block head %}
+    <link href="{% static 'css/auth.css' %}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+
+
+<!-- تسجيل الدخول -->
+<div id="login-box" class="form-box active">
+    <div class="container1" >
+        <div class="box1">
+            <i class="fas fa-sign-in-alt icon"></i>
+            <h1>تسجيل الدخول</h1>
+            <p>مرحباً بعودتك، يرجى إدخال بيانات حسابك</p>
+
+            {% if success_message %}
+                <p class="success-message">{{ success_message }}</p>
+            {% endif %}
+
+            {% if error_message %}
+                <p class="error-message">{{ error_message }}</p>
+            {% endif %}
+            <form action="{% url 'login' %}" method="post" class="login-form">
+                {% csrf_token %}
+                <input type="email" name="email" placeholder="أدخل بريدك الإلكتروني" value="{{ email|default_if_none:'' }}" autofocus required >
+                <input input type="password" name="password" placeholder="أدخل كلمة المرور" value="{{ password|default_if_none:'' }}" required >
+                <button class="login-btn" type="submit">
+                    <span class="login-text">تسجيل الدخول</span>
+                </button>
+            </form>
+            <p class="switch-link">
+                ليس لديك حساب؟ <span><a href="{% url 'register' %}">سجل الآن</a></span>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock body %}

@@ -1,0 +1,88 @@
+{% extends "main/layout.html" %}
+{% load static %}
+
+{% block head %}
+    <link href="{% static 'css/profile.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+
+<div class="container2 hidden-on-small" id="profile-form" >
+    <div class="box2">
+        <!-- عنوان الصفحة -->
+        <h1><i class="fa-solid fa-pen"></i> تعديل الملف الشخصي</h1>
+        <p>يرجى تحديث معلوماتك الشخصية بدقة</p>
+        {% if success_message %}
+            <p class="success-message">{{ success_message }}</p>
+        {% endif %}
+
+        {% if error_message %}
+            <p class="error-message">{{ error_message }}</p>
+        {% endif %}
+        <form method="post" class="profile-form">
+            {% csrf_token %}
+            <div class="form-row">
+                <input type="text" id="first-name" name="first_name" value="{{ user.first_name }}" required placeholder="الاسم الأول">
+            </div>
+
+            <div class="form-row">
+                <input type="text" id="last-name" name="last_name" value="{{ user.last_name }}" required placeholder="الاسم الأخير">
+            </div>
+
+            <div class="form-row">
+                <input type="email" id="email" name="email" value="{{ user.email }}" required placeholder="البريد الإلكتروني">
+            </div>
+
+            <div class="form-row">
+                <input type="tel" id="phone" name="phone" value="{{ user.phone }}" placeholder="رقم الهاتف">
+            </div>
+
+
+            <div class="form-row">
+                <div class="custom-select">
+                    <select id="level" name="education_level">
+                        <option disabled selected style="color: #999;">اختر المرحلة الإشرافية</option>
+                        {% for key, val in EDUCATION_CHOICES %}
+                            <option value="{{ key }}" {% if user.education_level == key %}selected{% endif %}>{{ val }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="custom-select role-select">
+                <select id="role" name="role">
+                    <option disabled selected style="color: #999;">الدور في الفريق</option>
+                    {% for key, val in ROLE_CHOICES %}
+                        <option value="{{ key }}" {% if user.role == key %}selected{% endif %}>{{ val }}</option>
+                    {% endfor %}
+                </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label for="password1">كلمة المرور</label>
+                <input type="password" id="password" name="password1" placeholder="أدخل كلمة المرور">
+            </div>
+
+            <div class="form-row">
+                <label for="password2">تأكيد كلمة المرور</label>
+                <input type="password" id="confirm-password" name="password2" placeholder="أعد إدخال كلمة المرور">
+            </div>
+
+
+            <div class="button-group"> 
+                <button class="login-btn" type="submit" onclick="hideForm(event)">
+                    <span class="login-text">حفظ التعديلات <i class="fa-solid fa-floppy-disk"></i></span>
+                </button>
+
+                <a href="{% url 'index' %}" class="back-home-btn">
+                    <span class="arrow-icon"><i class="fa-solid fa-arrow-right"></i> </span>
+                    <span class="btn-text">العودة للصفحة الرئيسية</span>
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock body %}

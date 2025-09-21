@@ -1,0 +1,81 @@
+{% extends "main/layout.html" %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />  
+    <link href="{% static 'css/auth.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+<div id="signup-box" class="form-box">
+    <div class="container1">
+        <div class="box1">
+            <div class="icon1"><i class="fas fa-user-plus"></i></div>
+            <h1 >إنشاء حساب جديد</h1>
+            <p>انضم إلى منصة مداد وابدأ رحلتك التعليمية</p>
+
+            {% if message %}
+                <p class="error-message">{{ message }}</p>
+            {% endif %}
+
+            <form action="{% url 'register' %}" method="post" class="login-form">
+                {% csrf_token %}
+                <div class="form-input">
+                    <div class="form-row">
+                    <input type="text" id="first-name" placeholder="الاسم الأول" value="{{ first_name|default_if_none:'' }}" name="first_name" required>
+                    </div>
+
+                    <div class="form-row">
+                        <input type="text" id="last-name" placeholder="الاسم الأخير" value="{{ last_name|default_if_none:'' }}" name="last_name">
+                    </div>
+
+                    <div class="form-row">
+                        <input type="email" id="email" placeholder="البريد الإلكتروني" value="{{ email|default_if_none:'' }}" name="email" required>
+                    </div>
+
+                    <div class="form-row">
+                        <input type="tel" id="phone" placeholder="رقم الهاتف" value="{{ phone|default_if_none:'' }}" name="phone">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="custom-select">
+                            <select id="level" name="education_level">
+                                <option disabled selected style="color: #999;">المرحلة الإشرافية</option>
+                                <option value="ابتدائي">ابتدائي</option>
+                                <option value="متوسط">متوسط</option>
+                                <option value="ثانوي">ثانوي</option>
+                                <option value="جامعي">جامعي</option>
+                            </select>
+                        </div>
+                    </div>
+            
+                    <div class="form-row">
+                        <div class="custom-select role-select">
+                        <select id="role" name="role">
+                        <option disabled selected style="color: #999;">اختر الدور</option>  
+                            <option value="عضو فريق">عضو فريق</option>
+                            <option value="قائد فريق">قائد فريق</option>
+                        </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <input type="password" id="password" placeholder="كلمة المرور" value="{{ password|default_if_none:'' }}" name="password" required>
+                    </div>
+
+                    <div class="form-row">
+                        <input type="password" id="confirm-password" placeholder="تأكيد كلمة المرور" value="{{ password2|default_if_none:'' }}" name="password2" required>
+                    </div>
+
+                    <button class="login-btn" type="submit">
+                        <span class="login-text">تسجيل</span>
+                    </button>
+                </div>
+            </form>
+            <div class="switch-link">
+                <p>لديك حساب بالفعل؟ <span><a href="{% url 'login' %}">سجل الدخول</a></span></p>
+            </div>
+        </div>    
+    </div>
+</div>
+{% endblock body %}

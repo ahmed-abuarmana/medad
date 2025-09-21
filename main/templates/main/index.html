@@ -1,0 +1,93 @@
+{% extends "main/layout.html" %}
+{% load static %}
+{% load custom_filters %}
+
+{% block head %}
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <!-- صندوق الترحيب -->
+    <div class="welcome-container">
+        <div class="welcome-box">
+            <div class="quotes-section">
+                <div class="quotes-container">
+                    <div class="quote active">
+                        <p class="quote-text">عبارة اليوم:</p>
+                        <p class="quote-text">{{ quote.content }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="user-section">
+                <div class="title">مرحباً <span>{{ user.first_name }} 👋</span></div>
+                <div class="team">"{{ user.role }}"</div>
+                <div class="message">نتمنى لك يوماً مليئًا بالإنجاز والتطوير</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- زر تعديل الملف الشخصي -->
+    <div class="btn-wrapper"> 
+        <a href="{% url 'edit_profile' %}" class="edit-profile-btn">
+            <i class="fas fa-user-edit pen-icon"></i>
+            <span class="btn-text">تعديل الملف الشخصي</span>
+        </a>
+    </div>
+
+    <!-- قسم الإعلانات -->
+    <section class="announcements-section">
+        <h2 class="section-title">
+            <i class="fa-solid fa-bullhorn"></i> الإعلانات
+        </h2>
+
+        {% for ad in ads %}
+        <div class="announcement-card">
+            <h3>{{ ad.title }}</h3>
+            <p><strong><i class="fa-solid fa-calendar-days"></i> التاريخ:</strong> {{ ad.date|date:"Y/m/d" }}</p>
+            <p><strong><i class="fa-solid fa-clock"></i> الوقت:</strong> {{ ad.time|arabic_time }}</p>
+            <p><strong><i class="fa-solid fa-map-pin"></i> المكان:</strong> {{ ad.place }}</p>
+            <p>{{ ad.details }}</p>
+            
+            <div class="announcement-actions">
+                {% if ad.loacation %}
+                <a href="{{ ad.loacation }}" target="_blank" class="map-btn">
+                    <i class="fas fa-map-marker-alt"></i> عرض على الخريطة
+                </a>
+                {% endif %}
+                
+                {% if ad.more_details %}
+                <a href="{{ ad.more_details }}" class="more-btn">المزيد...</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </section>
+
+    <!-- قسم الخدمات الرئيسية -->
+    <section class="main-services">
+        <h2 class="services-title">الخدمات الرئيسية</h2>
+        
+        <div class="service-card-container"> 
+            <div class="service-card">
+                <i class="fas fa-book-open service-icon"></i>
+                <h3>التكوين</h3>
+                <p>استكشف محتوياتنا التطويرية وارتقِ بمهاراتك</p>
+                <a href="{% url 'takwin' %}" class="service-btn">ابدأ الآن</a>
+            </div>
+
+            <div class="service-card">
+                <i class="fas fa-puzzle-piece service-icon"></i>
+                <h3>اللجان</h3>
+                <p>انضم إلى لجاننا المختلفة وشارك في الأنشطة</p>
+                <a href="{% url 'committees' %}" class="service-btn">استكشف اللجان</a>
+            </div>
+
+            <div class="service-card">
+                <i class="fas fa-tasks service-icon"></i>
+                <h3>برامجي</h3>
+                <p>تابع أنشطتك وبرامجك من خلال لوحة التحكم</p>
+                <a href="{% url 'control_panel' %}" class="service-btn">الانتقال</a>
+            </div>
+        </div>
+    </section>
+{% endblock body %}

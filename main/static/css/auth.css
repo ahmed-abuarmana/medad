@@ -1,0 +1,557 @@
+/* المحتوى */
+.main-content {
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.main-content h1 {
+  margin-bottom: 10px;
+  color: #444;
+}
+
+.main-content p {
+  color: #666;
+}
+
+/* للشاشات المتوسطة والكبيرة */
+@media (min-width: 769px) {
+  .logo {
+    order: 2;
+  }
+
+  .nav-container {
+    order: 1;
+  }
+
+  .mobile-menu-toggle {
+    order: 3;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+  }
+}
+
+/* استجابة للموبايل */
+ @media (max-width: 768px) {
+  .nav-container,
+  .auth-buttons {
+    display: none;
+  }
+
+  .mobile-menu-toggle {
+    display: flex;
+    flex-direction: row;         
+    justify-content: flex-end;    
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+    margin-top: -30px;            
+    position: relative;
+    top: -10px;                  
+  }
+  .menu-label {
+  color:      #00576F;  
+  font-weight: bold;
+  font-size: 16px;
+}
+.hamburger span {
+  background-color:  #005B66;  
+}
+
+
+  .header {
+    flex-direction: row-reverse; 
+    padding: 25px 20px;  
+    min-height: 100px;   
+  }
+  .logo {
+    justify-content: flex-start;
+    padding-left: 60px;
+    
+  }
+
+  .logo img {
+    height: 250px;
+    margin-right: 100px;
+  }
+
+  .mobile-sidebar {
+    right: -260px;
+  }
+
+  .mobile-sidebar.active {
+    right: 0;
+  }
+}
+
+/* main style*/
+.container1 {
+  animation: fadeIn 1.5s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 60px;
+  padding: 20px;
+}
+
+.box1 {
+  background: radial-gradient(circle at bottom right, #e0f7fa 0%, transparent 60%);
+  padding: 40px 20px;
+  border-radius: 15px;
+ /* box-shadow: 8px 8px 20px rgba(0, 121, 107, 0.3);*/
+  box-shadow: 8px 8px 20px rgba(0, 132, 171, 0.3);
+
+  text-align: center;
+  width: 600px;
+  min-height: 350px;
+}
+@keyframes slideFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.box1 {
+  animation: slideFadeIn 1s ease-out;
+}
+
+.icon {
+  font-size: 40px;
+  color: #00796b;
+  margin-bottom: 15px;
+}
+.box1 h1 {
+    color: #0084AB;
+    font-family: 'Cairo', sans-serif;
+     
+}
+.box1 P {
+    color: #000000;
+}
+.box1 i {
+    color: #0084AB;
+}
+input, select {
+  display: block;
+  width: 90%;
+  margin: 10px auto;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+button {
+  background-color: #00796b;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+ .login-btn {
+  width: 300px; /* الزر عريض */
+  background-color: #61BCD7; /* اللون الأساسي */
+  color: #0084AB;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 50px;
+  font-size: 18px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.4s ease;
+}
+
+/* التدرج عند مرور الماوس */
+.login-btn::before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, #0084AB 0%, transparent 100%);
+  transition: top 0.4s ease;
+  z-index: 0;
+}
+
+/* عند مرور الماوس يرتفع التدرج */
+.login-btn:hover::before {
+  top: 0;
+}
+
+/* النص داخل الزر */
+.login-text {
+  position: relative;
+  z-index: 1;
+  color: #0087AB;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+/* تغيير لون النص عند مرور الماوس */
+.login-btn:hover .login-text {
+  color: #fff;
+}
+
+input:focus,
+select:focus {
+  outline: none;  
+  border: 2px solid #475465;  
+  box-shadow: 0 0 5px rgba(71, 84, 101, 0.4);  
+}
+
+/* الحاوية العامة */
+.container1 {
+  animation: fadeIn 1.5s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 60px;
+  padding: 20px;
+}
+
+/* الصندوق */
+.box1 {
+  background: radial-gradient(circle at bottom right, #e0f7fa 0%, transparent 60%);
+  padding: 40px 20px;
+  border-radius: 15px;
+  box-shadow: 8px 8px 20px rgba(0, 132, 171, 0.3);
+  text-align: center;
+  width: 600px;
+  animation: slideFadeIn 1s ease-out;
+   
+}
+ 
+.icon1 {
+  font-size: 40px;
+  color: #00796b;
+  margin-bottom: 30px;
+   
+}
+.box1 h1  {
+  color: #0084AB;
+  font-family: 'Cairo', sans-serif;
+   
+   
+}
+.box1 p {
+  color: #444;
+  margin-bottom: 20px;
+}
+.box1 h1 p {
+     margin-bottom: 5px;
+}
+.box1 i {
+  color: #0084AB;
+}
+
+/* كل صف يحتوي على عنوان وحقل */
+.form-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+  max-width: 600px;
+  margin: 5px auto;
+  gap: 2px;
+  direction: rtl;
+}
+
+/* العنوان بجانب الحقل */
+.form-row label {
+  white-space: nowrap;
+  font-size: 18px;
+  color: #0084AB;
+  font-weight: 500;
+  font-family: 'Cairo', sans-serif;
+  width: 130px;
+  text-align: right;
+}
+
+/* الحقول */
+.form-row input {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  text-align: right;
+}
+
+/* القوائم المنسدلة */
+.custom-select {
+  position: relative;
+  flex: 1;
+}
+.custom-select select {
+  width: 100%;
+  padding: 16px 50px 16px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  direction: rtl;
+  appearance: none;
+  background-color: #fff;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+.custom-select::before {
+  content: "▼";
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #0084AB;
+  pointer-events: none;
+  z-index: 1;
+}
+.custom-select select option[disabled] {
+  color: #999;
+}
+/* زر التسجيل */
+.login-btn {
+  width: 300px;
+  background-color: #61BCD7;
+  color: #0084AB;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 50px;
+  font-size: 18px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.4s ease;
+  margin-top: 20px;
+}
+.login-btn::before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, #0084AB 0%, transparent 100%);
+  transition: top 0.4s ease;
+  z-index: 0;
+}
+.login-btn:hover::before {
+  top: 0;
+}
+.login-text {
+  position: relative;
+  z-index: 1;
+  color: #0087AB;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+.login-btn:hover .login-text {
+  color: #fff;
+}
+
+/* رابط تسجيل الدخول */
+.switch-link {
+  margin-top: 20px;
+  font-size: 14px;
+  text-align: center;
+}
+.switch-link span {
+  color: #00796b;
+  text-decoration: underline;
+  cursor: pointer;
+  border-bottom: 1px solid #00796b;
+}
+
+/* أنيميشن دخول */
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes slideFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* رابط التبديل */
+.switch-link {
+  margin-top: 20px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.switch-link span {
+  color: #00796b;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.form-box {
+  /* display: none; */
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.form-box.active {
+  display: block;
+}
+
+@media (max-width: 767px) {
+  .form-row {
+    display: flex;
+    flex-direction: row;         /* يخلي الكلمة والبوكس جنب بعض */
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;                   /* مسافة بسيطة بينهم */
+    margin: 5px auto;
+    direction: rtl;              /* يدعم اللغة العربية */
+    width: 100%;
+  }
+
+  .form-row label {
+    width: 100px;                /* عرض ثابت للكلمة */
+    font-size: 15px;
+    color: #0084AB;
+    font-weight: 500;
+    margin: 0;
+    white-space: nowrap;
+    text-align: right;
+  }
+
+  .form-row input,
+  .form-row select {
+    flex: 1;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    max-width: 220px;            /* عرض مناسب للجوال */
+  }
+
+  .custom-select {
+    position: relative;
+    flex: 1;
+  }
+
+  .custom-select select {
+    width: 100%;
+    padding: 10px 35px 10px 10px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    appearance: none;
+    background-color: #fff;
+  }
+
+  .custom-select::before {
+    content: "▼";
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: #0084AB;
+    pointer-events: none;
+  }
+
+  .login-btn {
+    width: 80%;
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 50px;
+    background-color: #61BCD7;
+    color: #0084AB;
+    margin-top: 12px;
+  }
+
+  .login-text {
+    font-weight: bold;
+    color: #0087AB;
+  }
+
+  .switch-link {
+    margin-top: 12px;
+    font-size: 13px;
+    text-align: center;
+  }
+
+  .switch-link span {
+    color: #00796b;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+.form-input {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.switch-link {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+  color: #333;
+}
+
+.switch-link a {
+  color: #007bff;      /* أزرق هادي */
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.switch-link a:hover {
+  color: #0056b3;      /* أزرق أغمق عند التمرير */
+  text-decoration: underline;
+}
+
+.error-message {
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 12px 15px;
+    border-radius: 5px;
+    margin: 10px 0;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    animation: fadeIn 0.3s ease-in;
+}
+
+.success-message {
+    color: #155724;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    padding: 12px 15px;
+    border-radius: 5px;
+    margin: 10px 0;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

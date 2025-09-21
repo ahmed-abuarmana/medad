@@ -1,0 +1,24 @@
+{% extends "main/layout.html" %}
+
+{% block body %}
+    <div class="container">
+        <div class="box">
+            <i class="fas fa-feather-alt icon"></i>
+            <h1>مرحبًا بك في منصة <span class="highlight">مــــــداد</span></h1>
+            <p>منصة مخصصة لخدمة المشرفين التربويين لتطويرهم وتوثيق إنجازاتهم.</p>
+            <div class="buttons">
+                <a href="{% url 'login' %}">
+                    <button class="login">
+                        <i class="fas fa-sign-in-alt"></i> تسجيل دخول
+                    </button>
+                </a>
+
+                <a href="{% url 'register' %}">
+                    <button class="signup">
+                    <i class="fas fa-user-plus"></i> إنشاء حساب
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

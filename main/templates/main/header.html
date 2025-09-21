@@ -1,0 +1,68 @@
+{% load static %}
+
+<!-- التدرجات الجانبية -->
+<div class="side-gradient-left"></div>
+<div class="side-gradient-right"></div>
+
+<div class="logo">
+    <img src="{% static 'images/logo.jpg' %}" alt="شعار مداد" />
+</div>
+
+<nav class="nav-container">
+    <ul class="nav-menu">
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'index' %}" class="nav-link"><i class="fas fa-home"></i> الرئيسية </a></li>
+            <li><a href="{% url 'takwin' %}" class="nav-link"><i class="fas fa-book-open"></i> التكوين </a></li>
+            <li><a href="{% url 'committees' %}" class="nav-link"><i class="fas fa-puzzle-piece"></i> اللجان </a></li>
+            <li><a href="{% url 'control_panel' %}" class="nav-link"><i class="fas fa-tasks"></i>برامجي </a></li>
+            <li><a href="{% url 'logout' %}" class="nav-link"><i class="fa-solid fa-right-from-bracket"></i>تسجيل الخروج </a></li>
+        {% endif %}
+        
+        {% if not user.is_authenticated %}
+            <h1>منصة مداد - Medad</h1>
+        {% endif %}
+    </ul>
+</nav>
+
+<div class="mobile-sidebar">
+    <div class="close-btn">&times;</div>
+    <ul class="mobile-menu">
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'index' %}" class="nav-link"><i class="fas fa-home"></i> الرئيسية </a></li>
+            <li><a href="{% url 'takwin' %}" class="nav-link"><i class="fas fa-book-open"></i> التكوين </a></li>
+            <li><a href="{% url 'committees' %}" class="nav-link"><i class="fas fa-puzzle-piece"></i> اللجان </a></li>
+            <li><a href="{% url 'control_panel' %}" class="nav-link"><i class="fas fa-tasks"></i>برامجي </a></li>
+            <li><a href="{% url 'logout' %}" class="nav-link"><i class="fa-solid fa-right-from-bracket"></i>تسجيل الخروج </a></li>
+        {% endif %}
+
+        {% if not user.is_authenticated %}
+            <h1>منصة مداد - Medad</h1>
+        {% endif %}
+
+      
+    </ul>
+</div>
+
+<div class="mobile-menu-toggle">
+    <span class="menu-label">القائمة</span>
+    <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</div>
+
+<script>
+    const hamburger = document.querySelector('.hamburger');
+    const sidebar = document.querySelector('.mobile-sidebar');
+    const closeBtn = document.querySelector('.close-btn');
+
+    hamburger.addEventListener('click', () => {
+        sidebar.classList.add('active');
+    });
+
+    closeBtn.addEventListener('click', () => {
+        sidebar.classList.remove('active');
+    });
+</script>
