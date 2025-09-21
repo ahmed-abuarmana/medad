@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عرض ملف PDF</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(90deg, #3498db 0%, #2c3e50 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 25px;
+        }
+        
+        .file-info {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-right: 4px solid #3498db;
+        }
+        
+        .file-info p {
+            margin: 8px 0;
+            color: #333;
+        }
+        
+        .file-info strong {
+            color: #2c3e50;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+        }
+        
+        .pdf-container {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            height: 70vh;
+            transition: all 0.3s ease;
+        }
+        
+        .pdf-container.hidden {
+            display: none;
+        }
+        
+        .pdf-viewer {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            color: #7f8c8d;
+            font-size: 14px;
+            border-top: 1px solid #eee;
+        }
+        
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .pdf-container {
+                height: 50vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>عرض ملف PDF</h1>
+            <p>منصة Takwin - نظام إدارة المستندات</p>
+        </div>
+        
+        <div class="content">
+            <div class="file-info">
+                <p><strong>العنوان:</strong> {{ takwin.title }}</p>
+                <p><strong>الوصف:</strong> {{ takwin.description }}</p>
+                <p><strong>تاريخ الإنشاء:</strong> {{ takwin.created_at|date:"Y-m-d" }}</p>
+            </div>
+            
+            <div class="controls">
+                <button id="toggleFile" class="btn btn-primary">
+                    <span>فتح الملف</span>
+                    <span>📂</span>
+                </button>
+                
+                <button id="downloadFile" class="btn btn-secondary">
+                    <span>تحميل الملف</span>
+                    <span>📥</span>
+                </button>
+            </div>
+            
+            <div id="pdfContainer" class="pdf-container hidden">
+                <iframe id="pdfViewer" class="pdf-viewer" src="{% if takwin.pdf %}{{ takwin.pdf.url }}{% endif %}" frameborder="0"></iframe>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2023 نظام Takwin - جميع الحقوق محفوظة</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const pdfContainer = document.getElementById('pdfContainer');
+            const toggleButton = document.getElementById('toggleFile');
+            const downloadButton = document.getElementById('downloadFile');
+            const pdfViewer = document.getElementById('pdfViewer');
+            
+            // زر عرض/إخفاء الملف
+            toggleButton.addEventListener('click', function() {
+                pdfContainer.classList.toggle('hidden');
+                
+                if (!pdfContainer.classList.contains('hidden')) {
+                    toggleButton.innerHTML = '<span>إخفاء الملف</span> <span>📁</span>';
+                } else {
+                    toggleButton.innerHTML = '<span>فتح الملف</span> <span>📂</span>';
+                }
+            });
+            
+            // زر تحميل الملف
+            downloadButton.addEventListener('click', function() {
+                if (pdfViewer.src) {
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = pdfViewer.src;
+                    downloadLink.download = 'document.pdf';
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                    document.body.removeChild(downloadLink);
+                }
+            });
+            
+            // تحميل حجم الملف (وهمي للعرض)
+            setTimeout(() => {
+                const fileSizeElements = document.querySelectorAll('.file-info p strong');
+                const fileSizeElement = document.createElement('p');
+                fileSizeElement.innerHTML = '<strong>حجم الملف:</strong> 2.4 MB';
+                document.querySelector('.file-info').appendChild(fileSizeElement);
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

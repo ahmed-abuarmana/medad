@@ -1,0 +1,135 @@
+{% extends "main/layout.html" %}
+{% load static %}
+
+{% block head %}
+    <link href="{% static 'css/takwin.css' %}" rel="stylesheet">
+{% endblock %}
+
+
+
+{% block body %}
+
+    <div class="dashboard">
+        <div class="takween">
+            <h2>تكوين</h2>
+            <p>اختر أحد الجوانب التالية لاستعراض محتوياتها</p>
+        </div>
+
+        <div class="progress-container">
+            <label>
+                إنجازك العام في تكوين
+                <span id="percentageText">{{ progress_takwins }}%</span>
+            </label>
+            <div class="progress-bar">
+                <div class="progress-fill" id="mainProgress" style="width: {{ progress_takwins }}%;"></div>
+            </div>
+            <p id="mainText">أكملت {{ num_done_takwins }} من {{ num_takwins }} دورة</p>
+            <p class="progress-encouragement">إبدأ اليوم وحقق المزيد من الإنجاز!</p>
+        </div>
+
+        <div class="cards">
+            <div class="card">
+                <div class="card-header">
+                    <a href="{% url 'tarbawiu' %}" class="card-link">الجانب التربوي <i class="fa-solid fa-brain"></i></a>
+                    <span class="card-percentage">{{ progress_tarbawiu }}%</span>
+                </div>
+                <div class="sub-progress">
+                    <div class="sub-fill" style="width: {{ progress_tarbawiu }}%;"></div>
+                </div>
+                <span>أكملت {{ num_done_tarbawiu }} من {{ num_tarbawiu }} دورة</span>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a href="{% url 'shareiu' %}" class="card-link">الجانب الشرعي <i class="fas fa-book-open"></i></a>
+                    <span class="card-percentage">{{ progress_shareiu }}%</span>
+                </div>
+                <div class="sub-progress">
+                    <div class="sub-fill" style="width: {{ progress_shareiu }}%;"></div>
+                </div>
+                <span>أكملت {{ num_done_shareiu }} من {{ num_shareiu }} دورة</span>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a href="{% url 'mhari' %}" class="card-link">الجانب المهاري <i class="fas fa-tools"></i></a>
+                    <span class="card-percentage">{{ progress_mhari }}%</span>
+                </div>
+                <div class="sub-progress">
+                    <div class="sub-fill" style="width: {{ progress_mhari }}%;"></div>
+                </div>
+                <span>أكملت {{ num_done_mhari }} من {{ num_mhari }} دورة</span>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a href="{% url 'medad' %}" class="card-link">دورات مداد <i class="fas fa-book"></i></a>
+                    <span class="card-percentage">{{ progress_medad }}%</span>
+                </div>
+                <div class="sub-progress">
+                    <div class="sub-fill" style="width: {{ progress_medad }}%;"></div>
+                </div>
+                <span>أكملت {{ num_done_medad }} من {{ num_medad }} دورة</span>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <a href="{% url 'index' %}" class="back-home-btn">
+                <span class="btn-text">العودة للصفحة الرئيسية <i class="fas fa-arrow-left"></i></span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+    // دالة لتحديد اللون حسب النسبة
+    function getColor(percentage) {
+        if (percentage <= 30) return "red";
+        if (percentage <= 70) return "orange";
+        return "green";
+    }
+
+    // تحريك أشرطة التقدم عند التحميل
+    window.addEventListener('load', function() {
+        // الشريط الرئيسي
+        setTimeout(() => {
+            const mainProgress = document.getElementById('mainProgress');
+            const percent = {{ progress_takwins }};
+            mainProgress.style.width = percent + '%';
+            mainProgress.style.backgroundColor = getColor(percent);
+        }, 800);
+
+        // الأشرطة الفرعية
+        const subFills = document.querySelectorAll('.sub-fill');
+        const percentages = [{{ progress_tarbawiu }}, {{ progress_shareiu }}, {{ progress_mhari }}, {{ progress_medad }}];
+        
+        subFills.forEach((fill, index) => {
+            const percent = percentages[index];
+            setTimeout(() => {
+                fill.style.width = percent + '%';
+                fill.style.backgroundColor = getColor(percent);
+            }, 1200 + (index * 200));
+        });
+    });
+
+    // تأثير التمرير للبطاقات
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationPlayState = 'running';
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.card').forEach(card => {
+        observer.observe(card);
+    });
+
+
+    </script>
+
+{% endblock %}
