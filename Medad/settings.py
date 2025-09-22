@@ -167,5 +167,12 @@ EMAIL_HOST_PASSWORD = "ukmwdflrmexnjyyt"      # App Password اللي أنشأت
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
+# في MIDDLEWARE
+MIDDLEWARE = [
+    # ...
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # ...
+]
 
-
+# في آخر الإعدادات
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
