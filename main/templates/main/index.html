@@ -10,6 +10,11 @@
     <!-- صندوق الترحيب -->
     <div class="welcome-container">
         <div class="welcome-box">
+            <div class="user-section">
+                <div class="title">مرحباً <span>{{ user.first_name }} 👋</span></div>
+                <div class="team">"{{ user.role }}"</div>
+                <div class="message">نتمنى لك يوماً مليئًا بالإنجاز والتطوير</div>
+            </div>
             <div class="quotes-section">
                 <div class="quotes-container">
                     <div class="quote active">
@@ -17,11 +22,6 @@
                         <p class="quote-text">{{ quote.content }}</p>
                     </div>
                 </div>
-            </div>
-            <div class="user-section">
-                <div class="title">مرحباً <span>{{ user.first_name }} 👋</span></div>
-                <div class="team">"{{ user.role }}"</div>
-                <div class="message">نتمنى لك يوماً مليئًا بالإنجاز والتطوير</div>
             </div>
         </div>
     </div>
