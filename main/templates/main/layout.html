@@ -15,7 +15,7 @@
     <header class="header">
         {% include "main/header.html" %}
     </header>
-      <!-- شاشة البداية -->
+    <!-- شاشة البداية -->
     <div id="splash">
         <video autoplay muted playsinline>
             <source src="{% static 'video/intro.mp4' %}" type="video/mp4">
@@ -42,7 +42,6 @@
         <h3>📩 مقترح جديد</h3>
         <form method="post" action="{% url 'add_suggestion' %}">
             {% csrf_token %}
-            
             <!-- حقل المحتوى -->
             <div class="form-group">
                 <label for="content">المقترح <span class="required">*</span></label>
@@ -58,62 +57,59 @@
     </div>
 </div>
 
+<script>
+    const splash = document.getElementById("splash");
+    const content = document.getElementById("content");
+    const video = splash.querySelector("video");
 
-    <script>
-        const splash = document.getElementById("splash");
-        const content = document.getElementById("content");
-        const video = splash.querySelector("video");
+    // عند انتهاء الفيديو
+    video.onended = () => {
+    splash.style.display = "none";
+    content.classList.add("show");
+    document.body.style.overflow = "auto";
+    };
 
-        // عند انتهاء الفيديو
-        video.onended = () => {
+    setTimeout(() => {
+    if (splash.style.display !== "none") {
         splash.style.display = "none";
         content.classList.add("show");
         document.body.style.overflow = "auto";
-        };
+    }
+    }, 2000);
 
-        setTimeout(() => {
-        if (splash.style.display !== "none") {
-            splash.style.display = "none";
-            content.classList.add("show");
-            document.body.style.overflow = "auto";
+    // فتح وإغلاق النافذة
+    const modal = document.getElementById("suggestion-modal");
+    const btn = document.getElementById("suggestion-btn");
+    const closes = document.querySelectorAll(".close");
+
+    btn.onclick = () => modal.style.display = "block";
+    closes.forEach(c => c.onclick = () => modal.style.display = "none");
+
+    // إغلاق عند الضغط خارج المودال
+    window.onclick = e => { if (e.target == modal) modal.style.display = "none"; }
+
+    // عد الأحرف للمقترح
+    const contentTextarea = document.getElementById('content');
+    const charCount = document.getElementById('charCount');
+    
+    contentTextarea.addEventListener('input', function() {
+        const length = this.value.length;
+        charCount.textContent = length;
+        
+        if (length > 240) {
+            charCount.style.color = '#e74c3c';
+        } else {
+            charCount.style.color = '#7f8c8d';
         }
-        }, 2000);
-
-
-
-        // فتح وإغلاق النافذة
-        const modal = document.getElementById("suggestion-modal");
-        const btn = document.getElementById("suggestion-btn");
-        const closes = document.querySelectorAll(".close");
-
-        btn.onclick = () => modal.style.display = "block";
-        closes.forEach(c => c.onclick = () => modal.style.display = "none");
-
-        // إغلاق عند الضغط خارج المودال
-        window.onclick = e => { if (e.target == modal) modal.style.display = "none"; }
-
-                // عد الأحرف للمقترح
-        const contentTextarea = document.getElementById('content');
-        const charCount = document.getElementById('charCount');
-        
-        contentTextarea.addEventListener('input', function() {
-            const length = this.value.length;
-            charCount.textContent = length;
-            
-            if (length > 240) {
-                charCount.style.color = '#e74c3c';
-            } else {
-                charCount.style.color = '#7f8c8d';
-            }
-        });
-        
-        // إضافة تأثير عند النقر على زر الإلغاء
-        document.querySelector('.close').addEventListener('click', function() {
-            if (confirm('هل أنت متأكد من إلغاء عملية الإرسال؟')) {
-                window.location.href = '/'; // تغيير هذا الرابط حسب احتياجك
-            }
-        });
-    </script>
+    });
+    
+    // إضافة تأثير عند النقر على زر الإلغاء
+    document.querySelector('.close').addEventListener('click', function() {
+        if (confirm('هل أنت متأكد من إلغاء عملية الإرسال؟')) {
+            window.location.href = '/'; // تغيير هذا الرابط حسب احتياجك
+        }
+    });
+</script>
 
 </body>
 </html>
