@@ -338,7 +338,7 @@ body {
 
   .logo img {
     height: 250px;
-    margin-right: 100px;
+    margin-right: 60px;
   }
 
   .mobile-sidebar {
@@ -902,4 +902,5 @@ font-size: 26px;
     background-color: #cacaca;
     color: #333;
 }
+
 
