@@ -1,13 +1,10 @@
 {% load static %}
-
 <!-- التدرجات الجانبية -->
 <div class="side-gradient-left"></div>
 <div class="side-gradient-right"></div>
-
 <div class="logo">
     <img src="{% static 'images/logo.jpg' %}" alt="شعار مداد" />
 </div>
-
 <nav class="nav-container">
     <ul class="nav-menu">
         {% if user.is_authenticated %}
@@ -16,9 +13,7 @@
             <li><a href="{% url 'committees' %}" class="nav-link"><i class="fas fa-puzzle-piece"></i> اللجان </a></li>
             <li><a href="{% url 'control_panel' %}" class="nav-link"><i class="fas fa-tasks"></i>برامجي </a></li>
             <li><a href="{% url 'logout' %}" class="nav-link"><i class="fa-solid fa-right-from-bracket"></i>تسجيل الخروج </a></li>
-        {% endif %}
-        
-        {% if not user.is_authenticated %}
+        {% else %}
             <h1>منصة مداد - Medad</h1>
         {% endif %}
     </ul>
@@ -33,18 +28,14 @@
             <li><a href="{% url 'committees' %}" class="nav-link"><i class="fas fa-puzzle-piece"></i> اللجان </a></li>
             <li><a href="{% url 'control_panel' %}" class="nav-link"><i class="fas fa-tasks"></i>برامجي </a></li>
             <li><a href="{% url 'logout' %}" class="nav-link"><i class="fa-solid fa-right-from-bracket"></i>تسجيل الخروج </a></li>
-        {% endif %}
-
-        {% if not user.is_authenticated %}
+        {% else %}
             <h1>منصة مداد - Medad</h1>
         {% endif %}
-
-      
     </ul>
 </div>
 
 <div class="mobile-menu-toggle">
-    <span class="menu-label">القائمة</span>
+    <span class="menu-label"></span>
     <div class="hamburger">
         <span></span>
         <span></span>
