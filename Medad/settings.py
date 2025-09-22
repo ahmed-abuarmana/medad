@@ -51,6 +51,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -167,12 +168,6 @@ EMAIL_HOST_PASSWORD = "ukmwdflrmexnjyyt"      # App Password اللي أنشأت
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
-# في MIDDLEWARE
-MIDDLEWARE = [
-    # ...
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-    # ...
-]
-
 # في آخر الإعدادات
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
