@@ -81,6 +81,12 @@ body {
   .side-gradient-right {
     display: none;
   }
+
+  #splash video {
+      /* تأكد من أن الفيديو لا يتجاوز ارتفاع الشاشة على الجوال */
+      object-fit: contain;
+      background: #000;
+  }
 }
 
 
@@ -147,8 +153,6 @@ body {
 .nav-link:hover {
   color: #004d40;
 }
-
- 
 
 /* القائمة للموبايل */
 .mobile-menu-toggle {
@@ -298,7 +302,7 @@ body {
 }
 
 /* استجابة للموبايل */
- @media (max-width: 768px) {
+@media (max-width: 768px) {
   .nav-container,
   .auth-buttons {
     display: none;
@@ -338,7 +342,7 @@ body {
 
   .logo img {
     height: 250px;
-    margin-right: 60px;
+    margin-right: 130px;
   }
 
   .mobile-sidebar {
@@ -705,9 +709,19 @@ font-size: 26px;
   margin-bottom: -30px;
   width: 100%;
   height: auto;
+  max-height: 100px;
 }
 
 
+@media (max-width: 768px) {
+  .footer-pattern img {
+    max-height: 200px;
+    margin-top: 10px;
+    /* margin-bottom: -20px; */
+    height: 30px;
+    width: auto;
+  }
+}
 
 #splash {
   position: fixed;
@@ -733,7 +747,6 @@ font-size: 26px;
     object-fit: contain;
   }
 }
-
 
 #content {
   display: none;
@@ -902,5 +915,3 @@ font-size: 26px;
     background-color: #cacaca;
     color: #333;
 }
-
-
