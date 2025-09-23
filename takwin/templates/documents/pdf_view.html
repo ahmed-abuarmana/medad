@@ -3,8 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% comment %} Font Awesome library {% endcomment %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <title>عرض ملف PDF</title>
     <style>
+        :root {
+            --primary: #3498db;
+            --primary-dark: #2980b9;
+            --danger: #e74c3c;
+            --danger-dark: #c0392b;
+            --text-dark: #2c3e50;
+            --text-light: #333;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -28,7 +39,7 @@
         }
         
         .header {
-            background: linear-gradient(90deg, #3498db 0%, #2c3e50 100%);
+            background: linear-gradient(90deg, var(--primary) 0%, #2c3e50 100%);
             color: white;
             padding: 20px;
             text-align: center;
@@ -53,16 +64,16 @@
             padding: 15px;
             border-radius: 8px;
             margin-bottom: 20px;
-            border-right: 4px solid #3498db;
+            border-right: 4px solid var(--primary);
         }
         
         .file-info p {
             margin: 8px 0;
-            color: #333;
+            color: var(--text-light);
         }
         
         .file-info strong {
-            color: #2c3e50;
+            color: var(--text-dark);
         }
         
         .controls {
@@ -86,22 +97,22 @@
         }
         
         .btn-primary {
-            background-color: #3498db;
+            background-color: var(--primary);
             color: white;
         }
         
         .btn-primary:hover {
-            background-color: #2980b9;
+            background-color: var(--primary-dark);
             transform: translateY(-2px);
         }
         
         .btn-secondary {
-            background-color: #e74c3c;
+            background-color: var(--danger);
             color: white;
         }
         
         .btn-secondary:hover {
-            background-color: #c0392b;
+            background-color: var(--danger-dark);
             transform: translateY(-2px);
         }
         
@@ -123,7 +134,7 @@
             height: 100%;
             border: none;
         }
-        
+
         .footer {
             text-align: center;
             margin-top: 20px;
@@ -153,7 +164,7 @@
     <div class="container">
         <div class="header">
             <h1>عرض ملف PDF</h1>
-            <p>منصة Takwin - نظام إدارة المستندات</p>
+            <p>منصة Medad - نظام إدارة الملفات</p>
         </div>
         
         <div class="content">
@@ -163,28 +174,33 @@
                 <p><strong>تاريخ الإنشاء:</strong> {{ takwin.created_at|date:"Y-m-d" }}</p>
             </div>
             
+            {% if takwin.pdf %}
             <div class="controls">
-                <button id="toggleFile" class="btn btn-primary">
+                <button type="button" id="toggleFile" class="btn btn-primary">
                     <span>فتح الملف</span>
-                    <span>📂</span>
+                    <span><i class="fa-solid fa-folder-open" title="فتح"></i></span>
                 </button>
                 
-                <button id="downloadFile" class="btn btn-secondary">
+                <button type="button" id="downloadFile" class="btn btn-secondary">
                     <span>تحميل الملف</span>
-                    <span>📥</span>
+                    <span><i class="fa-solid fa-download" title="تحميل"></i></span>
                 </button>
             </div>
             
             <div id="pdfContainer" class="pdf-container hidden">
-                <iframe id="pdfViewer" class="pdf-viewer" src="{% if takwin.pdf %}{{ takwin.pdf.url }}{% endif %}" frameborder="0"></iframe>
+                <iframe id="pdfViewer" class="pdf-viewer" src="{{ takwin.pdf.url }}" frameborder="0"></iframe>
             </div>
+            {% else %}
+            <p style="color: red; font-weight: bold;">لا يوجد ملف PDF متاح.</p>
+            {% endif %}
         </div>
         
         <div class="footer">
-            <p>© 2023 نظام Takwin - جميع الحقوق محفوظة</p>
+            <p>© 2025 منصة مداد — جميع الحقوق محفوظة</p>
         </div>
     </div>
 
+    {% if takwin.pdf %}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const pdfContainer = document.getElementById('pdfContainer');
@@ -197,9 +213,9 @@
                 pdfContainer.classList.toggle('hidden');
                 
                 if (!pdfContainer.classList.contains('hidden')) {
-                    toggleButton.innerHTML = '<span>إخفاء الملف</span> <span>📁</span>';
+                    toggleButton.innerHTML = '<span>إخفاء الملف</span> <span><i class="fa-solid fa-eye-slash"></i></span>';
                 } else {
-                    toggleButton.innerHTML = '<span>فتح الملف</span> <span>📂</span>';
+                    toggleButton.innerHTML = '<span>فتح الملف</span> <span><i class="fa-solid fa-folder-open"></i></span>';
                 }
             });
             
@@ -208,21 +224,14 @@
                 if (pdfViewer.src) {
                     const downloadLink = document.createElement('a');
                     downloadLink.href = pdfViewer.src;
-                    downloadLink.download = 'document.pdf';
+                    downloadLink.download = '{{ takwin.title|default:"document" }}.pdf';
                     document.body.appendChild(downloadLink);
                     downloadLink.click();
                     document.body.removeChild(downloadLink);
                 }
             });
-            
-            // تحميل حجم الملف (وهمي للعرض)
-            setTimeout(() => {
-                const fileSizeElements = document.querySelectorAll('.file-info p strong');
-                const fileSizeElement = document.createElement('p');
-                fileSizeElement.innerHTML = '<strong>حجم الملف:</strong> 2.4 MB';
-                document.querySelector('.file-info').appendChild(fileSizeElement);
-            }, 1000);
         });
     </script>
+    {% endif %}
 </body>
 </html>
