@@ -578,3 +578,39 @@ body {
         transition-duration: 0.01ms !important;
     }
 }
+
+
+.fa-bullseye:before {
+    background: linear-gradient(135deg, #1E3A8A, #3B82F6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.fa-video-camera:before, .fa-video:before {
+    background: linear-gradient(135deg, #0D9488, #14B8A6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.fa-cutlery:before, .fa-utensils:before {
+    background: linear-gradient(135deg, #B91C1C, #DC2626);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.fa-trophy:before {
+    background: linear-gradient(135deg, #91CCB0, #A7F3D0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.fa-futbol-ball:before, .fa-futbol:before, .fa-soccer-ball:before {
+    background: linear-gradient(135deg, #38BDF8, #0EA5E9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.fa-book:before {
+    background: linear-gradient(135deg, #F46036, #FB923C);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
