@@ -310,29 +310,29 @@ body {
 
   .mobile-menu-toggle {
     display: flex;
-    flex-direction: row;         /* يخلي الكلمة أولًا ثم الشرطات */
-    justify-content: flex-end;   /* يحركهم لأقصى يمين */
+    flex-direction: row;         
+    justify-content: flex-end;   
     align-items: center;
     gap: 10px;
     margin-left: auto;
-    margin-top: -30px;           /* يرفعهم لفوق شوي */
+    margin-top: 0;          
     position: relative;
     top: -10px;                  /* أو استخدمي هذا بدل margin-top */
   }
   .menu-label {
-  color:      #00576F; /* أو أي لون تركوازي يناسبك */
+  color:      #00576F; 
   font-weight: bold;
   font-size: 16px;
 }
 .hamburger span {
-  background-color:  #005B66; /* نفس اللون أو لون مختلف حسب التصميم */
+  background-color:  #005B66;
 }
 
 
   .header {
     flex-direction: row-reverse; 
-    padding: 25px 20px; /* زيدي المساحة العلوية والسفلية */
-    min-height: 100px;  /* يضمن ارتفاع أكبر للهيدر */
+    padding: 25px 20px;
+    min-height: 100px; 
   }
   .logo {
     justify-content: flex-start;
@@ -444,7 +444,7 @@ p {
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  z-index: 1;
+  /* z-index: 1; */
 }
 
 
@@ -915,4 +915,3 @@ font-size: 26px;
     background-color: #cacaca;
     color: #333;
 }
-
