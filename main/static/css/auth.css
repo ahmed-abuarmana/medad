@@ -166,7 +166,7 @@
 
 .login-text {
     position: relative;
-    z-index: 1;
+    /* z-index: 1; */
     color: #0087AB;
     font-weight: bold;
     transition: color 0.3s ease;
@@ -269,7 +269,7 @@
     }
     
     .icon, .icon1 {
-        font-size: 35px;
+        /* font-size: 35px; */
         margin-bottom: 15px;
     }
     
