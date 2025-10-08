@@ -18,9 +18,9 @@
                     {% if "youtu.be" in takwin.link %}
                         {% with takwin.link|cut:"https://youtu.be/" as vid %}
                             <div class="video-container">
-                                <iframe src="https://www.youtube.com/embed/{{ vid|slice:':11' }}" 
-                                        title="YouTube video player" frameborder="0" 
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                <iframe src="https://www.youtube.com/embed/{{ vid|slice:':11' }}"
+                                        title="YouTube video player" frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                         allowfullscreen>
                                 </iframe>
                             </div>
@@ -28,9 +28,9 @@
                     {% elif "watch?v=" in takwin.link %}
                         {% with takwin.link|cut:"https://www.youtube.com/watch?v=" as vid %}
                             <div class="video-container">
-                                <iframe src="https://www.youtube.com/embed/{{ vid|slice:':11' }}" 
-                                        title="YouTube video player" frameborder="0" 
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                <iframe src="https://www.youtube.com/embed/{{ vid|slice:':11' }}"
+                                        title="YouTube video player" frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                         allowfullscreen>
                                 </iframe>
                             </div>
@@ -51,7 +51,7 @@
 
             <h2 class="program-title">{{ takwin.title }}</h2>
 
-            
+
             {% if takwin.description %}
                 <p class="program-description">
                     {{ takwin.description|slice:":255" }}
@@ -76,7 +76,7 @@
                 {% endif %}
 
                 {% if takwin.pdf %}
-                    <a href="{% url 'pdf_view' takwin.id %}" target="_blank" rel="noopener noreferrer" class="pdf-link">
+                    <a href="{% url 'pdf_view_takwin' takwin.id %}" target="_blank" rel="noopener noreferrer" class="pdf-link">
                         <span class="pdf-icon"><i class="fa-solid fa-file"></i></span>
                         <span class="pdf-text">عرض PDF</span>
                     </a>
@@ -127,7 +127,7 @@
         const modal = document.getElementById("description-modal");
         const modalDescription = document.getElementById("modal-description");
         const closeBtn = modal.querySelector(".custom-close");
-        
+
         // إضافة حدث النقر لعرض المزيد
         document.querySelectorAll(".show-more").forEach(link => {
             link.addEventListener("click", function (e) {
@@ -137,7 +137,7 @@
                 modal.style.display = "flex";
                 // إضافة التركيز على النافذة المنبثقة للأمانة
                 modal.focus();
-                
+
                 // إضافة التركيز على زر الإغلاق لتسهيل التنقل
                 setTimeout(() => {
                     closeBtn.focus();
@@ -154,16 +154,16 @@
                 activeLink.focus();
             }
         }
-        
+
         closeBtn.addEventListener("click", closeModal);
-        
+
         // إغلاق النافذة عند النقر خارج المحتوى
         modal.addEventListener("click", function(e) {
             if (e.target === modal) {
                 closeModal();
             }
         });
-        
+
         // إغلاق النافذة بمفتاح ESC
         document.addEventListener("keydown", function(e) {
             if (e.key === "Escape" && modal.style.display === "flex") {

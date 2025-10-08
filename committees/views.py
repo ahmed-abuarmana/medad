@@ -103,3 +103,9 @@ def toggle_committee(request, committee_id):
 
     # ارجع المستخدم لنفس الصفحة
     return redirect(request.META.get('HTTP_REFERER', 'social'))
+
+
+@login_required(login_url="/auth")
+def pdf_view_committe(request, committee_id):
+    committee = get_object_or_404(Committee, id=committee_id)
+    return render(request, 'documents/pdf_view.html', {'committee': committee})

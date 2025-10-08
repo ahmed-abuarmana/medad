@@ -9,7 +9,7 @@
 {% block body %}
 <div class="committee-page">
     <h1 class="animated-title">اللجنة الإجتماعية</h1>
-    
+
     <div class="committees-grid">
         {% if not committees %}
         <div class="no-programs-message">
@@ -26,10 +26,10 @@
                     {% if "youtu.be" in committee.link %}
                         {% with committee.link|cut:"https://youtu.be/" as vid %}
                             <div class="video-container">
-                                <iframe 
-                                    src="https://www.youtube.com/embed/{{ vid|slice:':11' }}" 
-                                    title="YouTube video player" frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                <iframe
+                                    src="https://www.youtube.com/embed/{{ vid|slice:':11' }}"
+                                    title="YouTube video player" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                     allowfullscreen>
                                 </iframe>
                             </div>
@@ -37,10 +37,10 @@
                     {% elif "watch?v=" in committee.link %}
                         {% with committee.link|cut:"https://www.youtube.com/watch?v=" as vid %}
                             <div class="video-container">
-                                <iframe 
-                                    src="https://www.youtube.com/embed/{{ vid|slice:':11' }}" 
-                                    title="YouTube video player" frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                <iframe
+                                    src="https://www.youtube.com/embed/{{ vid|slice:':11' }}"
+                                    title="YouTube video player" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                     allowfullscreen>
                                 </iframe>
                             </div>
@@ -50,17 +50,17 @@
                             <p>رابط غير مدعوم</p>
                         </div>
                     {% endif %}
-                {% elif committee.image %}
+                {% elif committee.get_image_url %}
                     <div class="committee-image">
-                        <img src="{{ committee.image.url }}" alt="{{ committee.title }}" loading="lazy" />
+                        <img src="{{ committee.get_image_url }}" alt="{{ committee.title }}" loading="lazy" />
                     </div>
                 {% endif %}
-                
+
                 <h2 class="committee-title">{{ committee.title }}</h2>
-                
+
                 {% if committee.education_levels %}
                     <div class="education-levels">
-                        <span class="education-label">المرحلة الإشرافية</span>
+                        <span class="education-label">المرحلة</span>
                         <div class="levels-container">
                             {% for level in committee.get_education_levels_list %}
                                 <span class="education-level">{{ level }}</span>
@@ -75,8 +75,8 @@
                     ... <a href="#" class="show-more" data-description="{{ committee.description|escapejs }}">عرض المزيد</a>
                 {% endif %}
                 </p>
-                
-                {% if committee.link %} 
+
+                {% if committee.link %}
                     <a href="{{ committee.link }}" target="_blank" rel="noopener noreferrer" class="pdf-link">
                         <span class="pdf-icon"><i class="fa-solid fa-link"></i></span>
                         <span class="pdf-text">رابط البرنامج</span>
@@ -89,7 +89,7 @@
                 {% endif %}
 
                 {% if committee.pdf %}
-                    <a href="{% url 'pdf_view' committee.id %}" target="_blank" rel="noopener noreferrer" class="pdf-link">
+                    <a href="{% url 'pdf_view_committe' committee.id %}" target="_blank" rel="noopener noreferrer" class="pdf-link">
                         <span class="pdf-icon"><i class="fas fa-link"></i></span>
                         <span class="pdf-text">عرض الملف</span>
                     </a>
@@ -99,7 +99,7 @@
                         <span class="pdf-text">لا يوجد ملف مرفق</span>
                     </a>
                 {% endif %}
-                
+
                 <form method="post" action="{% url 'toggle_committee' committee.id %}" onsubmit="handleSubmit(event, this)">
                     {% csrf_token %}
                     {% if committee.is_added %}
@@ -138,7 +138,7 @@
         const modal = document.getElementById("description-modal");
         const modalDescription = document.getElementById("modal-description");
         const closeBtn = modal.querySelector(".custom-close");
-        
+
         // إضافة حدث النقر لعرض المزيد
         document.querySelectorAll(".show-more").forEach(link => {
             link.addEventListener("click", function (e) {
@@ -155,14 +155,14 @@
         closeBtn.addEventListener("click", function() {
             modal.style.display = "none";
         });
-        
+
         // إغلاق النافذة عند النقر خارج المحتوى
         window.addEventListener("click", function(e) {
             if (e.target === modal) {
                 modal.style.display = "none";
             }
         });
-        
+
         // إغلاق النافذة بمفتاح ESC
         document.addEventListener("keydown", function(e) {
             if (e.key === "Escape" && modal.style.display === "flex") {

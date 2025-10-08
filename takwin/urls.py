@@ -8,5 +8,5 @@ urlpatterns = [
     path('mhari/', views.mhari, name="mhari"),
     path('medad/', views.medad, name="medad"),
     path('toggle_takwin/<int:takwin_id>/', views.toggle_takwin, name='toggle_takwin'),
-    path('pdf/<int:takwin_id>/', views.pdf_view, name='pdf_view'),
+    path('pdf/<int:takwin_id>/', views.pdf_view_takwin, name='pdf_view_takwin'),
 ]

@@ -13,7 +13,7 @@ def takwin(request):
     num_tarbawiu = Takwin.objects.filter(aspect='tarbawiu').order_by('-created_at').count()
     num_done_tarbawiu = UserTakwin.objects.filter(user=request.user, takwin__aspect='tarbawiu', is_done=True).count()
     progress_tarbawiu = calc_percentage(num_done_tarbawiu, num_tarbawiu)
-    
+
     num_shareiu = Takwin.objects.filter(aspect='shareiu').order_by('-created_at').count()
     num_done_shareiu = UserTakwin.objects.filter(user=request.user, takwin__aspect='shareiu', is_done=True).count()
     progress_shareiu = calc_percentage(num_done_shareiu, num_shareiu)
@@ -113,6 +113,6 @@ def toggle_takwin(request, takwin_id):
 
 
 
-def pdf_view(request, takwin_id):
+def pdf_view_takwin(request, takwin_id):
     takwin = get_object_or_404(Takwin, id=takwin_id)
-    return render(request, 'documents/pdf_view.html', {'takwin': takwin})
+    return render(request, 'documents/pdf_view_takwin.html', {'takwin': takwin})

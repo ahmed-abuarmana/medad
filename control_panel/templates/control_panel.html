@@ -14,11 +14,11 @@
             <div class="page-container">
                 {% if user_committees %}
                 {% for uc in user_committees %}
-                <div class="program-card reveal {{ uc.committee.get_committees_display|lower }}" 
+                <div class="program-card reveal {{ uc.committee.get_committees_display|lower }}"
                     style="--card-index: {{ forloop.counter }}">
                     <h2 class="program-title">{{ uc.committee.title }} - اللجنة {{ uc.committee.get_committees_display }}</h2>
                     <p class="program-description">{{ uc.committee.description }}</p>
-                    <div class="button-group"> 
+                    <div class="button-group">
                         {% if uc.committee.link %}
                             <a href="{{ uc.committee.link }}" target="_blank" rel="noopener noreferrer" class="pdf-link">
                                 <span class="pdf-icon"><i class="fa-solid fa-link"></i></span>
@@ -27,7 +27,7 @@
                         {% endif %}
 
                         {% if uc.committee.pdf %}
-                            <a href="{% url 'pdf_view' uc.committee.id %}" target="_blank" rel="noopener noreferrer" class="pdf-link">
+                            <a href="{% url 'pdf_view_committe' uc.committee.id %}" target="_blank" rel="noopener noreferrer" class="pdf-link">
                                 <span class="pdf-icon"><i class="fa-solid fa-file-pdf"></i></span>
                                 <span class="pdf-text">عرض PDF</span>
                             </a>
@@ -51,14 +51,14 @@
                     <p>لا يوجد برامج للجان بعد. اضف برامج وتابع تقدمك</p>
                 </div>
                 {% endif %}
-                
+
                 <div class="back-button-wrapper">
                     <a href="{% url 'committees' %}" class="back-button">العودة إلى اللجان</a>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <div class="home-back-container">
         <a href="{% url 'index' %}" class="home-back-button">العودة إلى الصفحة الرئيسية</a>
     </div>
@@ -68,12 +68,12 @@
     // Scroll reveal animation
     function reveal() {
         const reveals = document.querySelectorAll(".reveal");
-        
+
         reveals.forEach((element, index) => {
             const windowHeight = window.innerHeight;
             const elementTop = element.getBoundingClientRect().top;
             const elementVisible = 150;
-            
+
             if (elementTop < windowHeight - elementVisible) {
                 setTimeout(() => {
                     element.classList.add("active");
@@ -81,21 +81,21 @@
             }
         });
     }
-    
+
     // Initial call and event listener
     window.addEventListener("load", reveal);
     window.addEventListener("scroll", reveal);
-    
+
     // Hover animation for cards
     document.addEventListener("DOMContentLoaded", function() {
         const cards = document.querySelectorAll(".program-card");
-        
+
         cards.forEach(card => {
             card.addEventListener("mouseenter", function() {
                 this.style.transform = "translateY(-7px) scale(1.02)";
                 this.style.zIndex = "10";
             });
-            
+
             card.addEventListener("mouseleave", function() {
                 this.style.transform = "translateY(0) scale(1)";
                 this.style.zIndex = "1";

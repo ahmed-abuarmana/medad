@@ -10,4 +10,6 @@ urlpatterns = [
     path('sports/', views.sports, name="sports"),
     path('volunteer/', views.volunteer, name="volunteer"),
     path('toggle_committee/<int:committee_id>/', views.toggle_committee, name='toggle_committee'),
+    path('pdf/<int:committee_id>/', views.pdf_view_committe, name='pdf_view_committe'),
+
 ]

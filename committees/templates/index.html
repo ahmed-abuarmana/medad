@@ -2,9 +2,10 @@
 {% load static %}
 
 {% block head %}
-    <link href="{% static 'css/committees.css' %}" rel="stylesheet">
     <!-- إضافة Font Awesome إذا لم تكن موجودة -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link href="{% static 'css/committees.css' %}" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 {% endblock %}
 
@@ -19,14 +20,14 @@
     </header>
 
     <div class="committees-grid">
-        
+
         <div class="committee-card">
             <div class="icon"><i class="fas fa-bullseye fa-3x mb-3"></i></div>
             <h2>اللجنة الثقافية</h2>
             <p>تنمية الثقافة والمعرفة</p>
             <button><a href="{% url 'cultural' %}">استكشف اللجنة</a></button>
         </div>
-        
+
         <div class="committee-card">
             <div class="icon"><i class="fas fa-video fa-3x mb-3"></i></div>
             <h2>اللجنة الإعلامية</h2>
@@ -40,7 +41,7 @@
             <p>تنظيم الفعاليات الاجتماعية</p>
             <button><a href="{% url 'social' %}">استكشف اللجنة</a></button>
         </div>
-        
+
         <div class="committee-card">
             <div class="icon"><i class="fas fa-trophy fa-3x mb-3"></i></div>
             <h2>اللجنة التحفيزية</h2>
